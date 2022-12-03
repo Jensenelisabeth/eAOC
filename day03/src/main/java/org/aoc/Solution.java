@@ -3,9 +3,10 @@ package org.aoc;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Solution {
 
@@ -19,8 +20,21 @@ public class Solution {
 
     }
 
-    private int part2(List<String> unmodifiableList) {
-        return 0;
+    public int part2(List<String> unmodifiableList) {
+        return partition(unmodifiableList).stream().mapToInt(this::getBadge).map(this::getTranslation).sum();
+    }
+
+    private int getBadge(List<String> strings) {
+       return strings.get(0).chars()
+              .filter((a)-> strings.get(1).contains(Character.toString(a)) && strings.get(2).contains(Character.toString(a))).findFirst().orElse(0);
+    }
+
+
+    private static Collection<List<String>> partition(List<String> collection) {
+        AtomicInteger counter = new AtomicInteger();
+        return collection.stream()
+                .collect(Collectors.groupingBy(it -> counter.getAndIncrement() / 3))
+                .values();
     }
 
 

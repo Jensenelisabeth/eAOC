@@ -20,4 +20,10 @@ class SolutionTest {
         Integer result = new Solution().part1(Collections.unmodifiableList(Solution.Parser.inputString("testInput.txt")));
         assertEquals(157, result);
     }
+
+    @Test
+    void testPart2() throws IOException {
+        Integer result = new Solution().part2(Collections.unmodifiableList(Solution.Parser.inputString("testInput.txt")));
+        assertEquals(70, result);
+    }
 }
