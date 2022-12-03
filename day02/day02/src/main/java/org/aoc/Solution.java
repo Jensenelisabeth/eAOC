@@ -21,7 +21,7 @@ public class Solution {
     }
 
     public Integer part1(List<String> lines) throws IOException {
-       return lines.stream().mapToInt((word) -> getPoint(word)).sum();
+       return lines.stream().mapToInt(this::getPoint).sum();
     }
 
     private int getPoint(String word) {
@@ -78,13 +78,12 @@ public class Solution {
 
     public Integer part2(List<String> unmodifiableList) {
         List<Integer> lines = getCalories(unmodifiableList);
-        Integer result = lines.get(0) + lines.get(1) + lines.get(2);
-        return result;
+        return lines.get(0) + lines.get(1) + lines.get(2);
     }
 
     private static List<Integer> getCalories(List<String> lines) {
         List<Integer> calories = new ArrayList<>();
-        Integer temp = 0;
+        int temp = 0;
 
         for (String calorie: lines) {
             if (!calorie.isEmpty()) {
@@ -99,6 +98,7 @@ public class Solution {
         Collections.reverse(calories);
         return calories;
     }
+
     public static class Parser {
 
         public static List<String> inputString(String fileName) throws IOException {
